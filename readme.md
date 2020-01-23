@@ -4,6 +4,81 @@ This is a skeleton build with GO for our development process.
 
 ---
 
+## Project Tree
+
+```bash
+├── LICENSE
+├── cmd
+│   ├── migration
+│   │   ├── migration.go
+│   │   └── option.go
+│   ├── readme.md
+│   └── root.go
+├── config
+│   ├── config.go
+│   ├── option.go
+│   └── readme.md
+├── go.mod
+├── go.sum
+├── internal
+│   ├── app
+│   │   ├── driver
+│   │   │   ├── db
+│   │   │   │   ├── db.go
+│   │   │   │   └── options.go
+│   │   │   ├── mysql.go
+│   │   │   └── pgsql.go
+│   │   ├── handler
+│   │   │   ├── handler.go
+│   │   │   ├── hcheck
+│   │   │   │   ├── hcheck.go
+│   │   │   │   └── options.go
+│   │   │   ├── options.go
+│   │   │   └── readme.md
+│   │   ├── middleware
+│   │   │   ├── exception.go
+│   │   │   └── readme.md
+│   │   ├── repository
+│   │   │   ├── hcheck
+│   │   │   │   ├── hcheck.go
+│   │   │   │   └── options.go
+│   │   │   ├── options.go
+│   │   │   └── repo.go
+│   │   ├── server
+│   │   │   ├── option.go
+│   │   │   ├── router.go
+│   │   │   └── server.go
+│   │   └── service
+│   │       ├── hcheck
+│   │       │   ├── hcheck.go
+│   │       │   └── options.go
+│   │       ├── options.go
+│   │       └── service.go
+│   ├── pkg
+│   │   └── http
+│   │       ├── presenter
+│   │       │   ├── base.go
+│   │       │   └── error.go
+│   │       ├── rest
+│   │       │   ├── httpaction.go
+│   │       │   └── writer.go
+│   │       └── wrapper
+│   │           ├── readme.md
+│   │           └── wrapper.go
+│   └── readme.md
+├── main.go
+├── migration
+│   ├── readme.md
+│   └── sql
+├── params
+│   └── env.yaml.example
+├── pkg
+│   └── readme.md
+└── readme.md
+```
+
+---
+
 ## Basic usage
 
 * **CLI**
