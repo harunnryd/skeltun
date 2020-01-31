@@ -1,0 +1,20 @@
+# docker-compose.yml
+version: '3'
+services:
+  web:
+    build: .
+    ports:
+      - "3000:3000"
+    links:
+      - pgsql
+  pgsql:
+    image: postgres:9.4
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: test
+      POSTGRES_PASSWORD: test
+      POSTGRES_DB: test
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
