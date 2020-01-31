@@ -7,6 +7,7 @@ This is a skeleton build with GO for our development process.
 **CLI**
 
 ```bash
+foo@bar:~$ docker-compose up -d
 foo@bar:~$ go run main.go help
 foo@bar:~$ go run main.go make:migration create_users_table postgres
 foo@bar:~$ go run main.go migrate:up postgres
