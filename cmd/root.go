@@ -39,7 +39,9 @@ var migrateUpCmd = &cobra.Command{
 	Args:  cobra.MinimumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		mgr := wiringMigration()
-		mgr.Up(args[0])
+		if err := mgr.Up(args[0]); err != nil {
+			fmt.Printf("Migrate up error: %s", err.Error())
+		}
 	},
 }
 
@@ -50,7 +52,9 @@ var migrateDownCmd = &cobra.Command{
 	Args:  cobra.MinimumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		mgr := wiringMigration()
-		mgr.Down(args[0])
+		if err := mgr.Down(args[0]); err != nil {
+			fmt.Printf("Migrate down error: %s", err.Error())
+		}
 	},
 }
 
