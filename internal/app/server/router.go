@@ -12,12 +12,17 @@ import (
 
 // Router ...
 func (s *Server) Router(handler handler.IHandler) (w wrapper.IWrapper) {
-	w = wrapper.New(chi.NewRouter())
+	w = wrapper.New(wrapper.WithRouter(chi.NewRouter()))
 	w.Use(middleware.URLNotFound)
 	w.Route("/v1", func(r chi.Router) {
 		router := r.(wrapper.IWrapper)
-		router.Action(rest.New(http.MethodGet, "/hc", handler.Hcheck().HealthCheck))
+		router.Action(
+			rest.New(
+				rest.WithHTTPMethod(http.MethodGet),
+				rest.WithPattern("/hc"),
+				rest.WithHandler(handler.Hcheck().HealthCheck),
+			),
+		)
 	})
-
 	return
 }
