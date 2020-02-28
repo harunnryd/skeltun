@@ -8,7 +8,7 @@ import (
 // IHandler ...
 type IHandler interface {
 	Hcheck() hcheck.IHcheck
-	Attendance() attendance.IAttendance
+	// Attendance() attendance.IAttendance
 }
 
 // Handler ...

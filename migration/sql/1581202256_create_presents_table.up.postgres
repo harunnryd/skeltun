@@ -1,0 +1,8 @@
+CREATE TABLE IF NOT EXISTS presents (
+  id uuid DEFAULT uuid_generate_v4(),
+  checkin_at TIMESTAMP NULL,
+  checkout_at TIMESTAMP NULL,
+  created_at TIMESTAMP DEFAULT current_timestamp,
+  updated_at TIMESTAMP DEFAULT current_timestamp,
+  PRIMARY KEY (id)
+);

@@ -1,0 +1,9 @@
+CREATE TABLE IF NOT EXISTS attachments (
+  id uuid DEFAULT uuid_generate_v4(),
+  attachmentable_id uuid NULL,
+  attachmentable_type VARCHAR NULL,
+  file_uri VARCHAR NULL,
+  created_at TIMESTAMP DEFAULT current_timestamp,
+  updated_at TIMESTAMP DEFAULT current_timestamp,
+  PRIMARY KEY (id)
+);

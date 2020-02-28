@@ -23,6 +23,13 @@ func (s *Server) Router(handler handler.IHandler) (w wrapper.IWrapper) {
 				rest.WithHandler(handler.Hcheck().HealthCheck),
 			),
 		)
+		router.Action(
+			rest.New(
+				rest.WithHTTPMethod(http.MethodGet),
+				rest.WithPattern("/attendance-books"),
+				rest.WithHandler(handler.Attendance().AttendanceBook),
+			),
+		)
 	})
 	return
 }

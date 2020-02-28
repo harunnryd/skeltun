@@ -1,12 +1,12 @@
 # docker-compose.yml
 version: '3'
 services:
-  web:
-    build: .
-    ports:
-      - "3000:3000"
-    links:
-      - pgsql
+  # web:
+  #   build: .
+  #   ports:
+  #     - "3000:3000"
+  #   links:
+  #     - pgsql
   pgsql:
     image: postgres:9.4
     restart: always

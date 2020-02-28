@@ -1,0 +1,11 @@
+CREATE TABLE IF NOT EXISTS attendances (
+  id uuid DEFAULT uuid_generate_v4(),
+  user_id uuid NULL,
+  attendanceable_id uuid NULL,
+  attendanceable_type VARCHAR NULL,
+  longitude VARCHAR NULL,
+  latitude VARCHAR NULL,
+  created_at TIMESTAMP DEFAULT current_timestamp,
+  updated_at TIMESTAMP DEFAULT current_timestamp,
+  PRIMARY KEY (id)
+);
