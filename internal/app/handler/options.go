@@ -2,6 +2,7 @@ package handler
 
 import (
 	"skeltun/config"
+	"skeltun/internal/app/handler/attendance"
 	"skeltun/internal/app/handler/hcheck"
 	"skeltun/internal/app/service"
 )
@@ -22,6 +23,10 @@ func WithHandler(config config.IConfig) Option {
 		handler.hcheck = hcheck.New(
 			hcheck.WithConfig(config),
 			hcheck.WithService(service),
+		)
+		handler.attendance = attendance.New(
+			attendance.WithConfig(config),
+			attendance.WithService(service),
 		)
 	}
 }

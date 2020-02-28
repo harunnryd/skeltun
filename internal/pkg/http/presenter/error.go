@@ -1,66 +1,48 @@
 package presenter
 
-import "net/http"
+import (
+	"net/http"
+	"skeltun/internal/pkg/http/presenter/failed"
+)
 
 // ErrUnknown ...
-var ErrUnknown *ErrorResponse = &ErrorResponse{
-	Response: Response{
-		ResponseCode: "00001",
-		ResponseDesc: "Unknown error",
-	},
-	HTTPStatus: http.StatusInternalServerError,
-}
+var ErrUnknown failed.IFailed = failed.New(
+	failed.WithHTTPStatus(http.StatusInternalServerError),
+	failed.WithResponseCode("00001"),
+	failed.WithResponseDesc("Unknown error"),
+)
 
-// ErrUnauthorized ...
-var ErrUnauthorized *ErrorResponse = &ErrorResponse{
-	Response: Response{
-		ResponseCode: "00002",
-		ResponseDesc: "You're not authorized",
-	},
-	HTTPStatus: http.StatusUnauthorized,
-}
+// ErrDBConnection ...
+var ErrDBConnection failed.IFailed = failed.New(
+	failed.WithHTTPStatus(http.StatusUnauthorized),
+	failed.WithResponseCode("00002"),
+	failed.WithResponseDesc("Database connection error"),
+)
 
 // ErrInvalidHeader ...
-var ErrInvalidHeader *ErrorResponse = &ErrorResponse{
-	Response: Response{
-		ResponseCode: "00003",
-		ResponseDesc: "Invalid/Incomplete header",
-	},
-	HTTPStatus: http.StatusBadRequest,
-}
+var ErrInvalidHeader failed.IFailed = failed.New(
+	failed.WithHTTPStatus(http.StatusBadRequest),
+	failed.WithResponseCode("00003"),
+	failed.WithResponseDesc("Invalid/Incomplete header"),
+)
 
 // ErrInvalidHeaderSignature ...
-var ErrInvalidHeaderSignature *ErrorResponse = &ErrorResponse{
-	Response: Response{
-		ResponseCode: "00004",
-		ResponseDesc: "Invalid header signature",
-	},
-	HTTPStatus: http.StatusBadRequest,
-}
+var ErrInvalidHeaderSignature failed.IFailed = failed.New(
+	failed.WithHTTPStatus(http.StatusBadRequest),
+	failed.WithResponseCode("00004"),
+	failed.WithResponseDesc("Invalid header signature"),
+)
 
-// ErrDatabase ...
-var ErrDatabase *ErrorResponse = &ErrorResponse{
-	Response: Response{
-		ResponseCode: "00005",
-		ResponseDesc: "Database error",
-	},
-	HTTPStatus: http.StatusInternalServerError,
-}
+// ErrDatabaseSQL ...
+var ErrDatabaseSQL failed.IFailed = failed.New(
+	failed.WithHTTPStatus(http.StatusInternalServerError),
+	failed.WithResponseCode("00005"),
+	failed.WithResponseDesc("Database sql error"),
+)
 
 // ErrURLNotFound ...
-var ErrURLNotFound *ErrorResponse = &ErrorResponse{
-	Response: Response{
-		ResponseCode: "00006",
-		ResponseDesc: "URL not found",
-	},
-	HTTPStatus: http.StatusNotFound,
-}
-
-// ErrDatabaseAuthFailed ...
-var ErrDatabaseAuthFailed *ErrorResponse = &ErrorResponse{
-	Response: Response{
-		ResponseCode: "00007",
-		ResponseDesc: "Authentication failed",
-	},
-	HTTPStatus: http.StatusInternalServerError,
-}
+var ErrURLNotFound failed.IFailed = failed.New(
+	failed.WithHTTPStatus(http.StatusNotFound),
+	failed.WithResponseCode("00006"),
+	failed.WithResponseDesc("URL not found"),
+)

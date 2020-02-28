@@ -3,6 +3,7 @@ package repository
 import (
 	"skeltun/config"
 	"skeltun/internal/app/driver/db"
+	"skeltun/internal/app/repository/attendance"
 	"skeltun/internal/app/repository/hcheck"
 )
 
@@ -11,7 +12,7 @@ type Option func(*Repository)
 
 // WithDatabase ...
 func WithDatabase(config config.IConfig) Option {
-	dbase        := db.New(db.WithConfig(config))
+	dbase := db.New(db.WithConfig(config))
 	mysqlConn, _ := dbase.Manager(db.MysqlDialectParam)
 	pgsqlConn, _ := dbase.Manager(db.PgsqlDialectParam)
 
@@ -26,6 +27,11 @@ func WithDatabase(config config.IConfig) Option {
 			hcheck.WithConfig(config),
 			hcheck.WithDatabase(db.PgsqlDialectParam, pgsqlConn),
 			hcheck.WithDatabase(db.MysqlDialectParam, mysqlConn),
+		)
+		repo.attendance = attendance.New(
+			attendance.WithConfig(config),
+			attendance.WithDatabase(db.PgsqlDialectParam, pgsqlConn),
+			attendance.WithDatabase(db.MysqlDialectParam, mysqlConn),
 		)
 	}
 }

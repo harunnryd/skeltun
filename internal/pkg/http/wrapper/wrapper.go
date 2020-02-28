@@ -10,7 +10,7 @@ import (
 // IWrapper ...
 type IWrapper interface {
 	chi.Router
-	Action(...rest.HTTPAction)
+	Action(...rest.IRest)
 }
 
 // Wrapper wraps chi.Router to pre-process http.Handler and add support for ActionHandler
@@ -20,10 +20,12 @@ type Wrapper struct {
 }
 
 // New ...
-func New(router chi.Router) IWrapper {
-	return &Wrapper{
-		Router: router,
+func New(opts ...Option) IWrapper {
+	wrapper := new(Wrapper)
+	for _, opt := range opts {
+		opt(wrapper)
 	}
+	return wrapper
 }
 
 var _ chi.Router = &Wrapper{}
@@ -76,8 +78,8 @@ func (r *Wrapper) Method(method, pattern string, handler http.Handler) {
 }
 
 // Action adds one or more HTTPAction for `h.Pattern()` that matches the `h.HTTPMethod()` HTTP method
-func (r *Wrapper) Action(handlers ...rest.HTTPAction) {
+func (r *Wrapper) Action(handlers ...rest.IRest) {
 	for _, handler := range handlers {
-		r.Router.Method(handler.HTTPMethod, handler.Pattern, handler.H)
+		r.Router.Method(handler.GetHTTPMethod(), handler.GetPattern(), handler.GetHandler())
 	}
 }
