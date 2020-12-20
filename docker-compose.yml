@@ -1,0 +1,55 @@
+# docker-compose.yml
+version: '3'
+services:
+  web:
+    restart: always
+    build: .
+    ports:
+      - "9002:3000"
+
+  redis:
+    restart: always
+    image: 'bitnami/redis:latest'
+    expose:
+      - 6379 
+    ports:
+      - "6379:6379"
+    environment:
+      REDIS_PASSWORD: powerrangers
+    volumes:
+      - './redis-persistence:/bitnami'
+
+  redis-commander:
+    container_name: redis-commander
+    image: rediscommander/redis-commander:latest
+    restart: always
+    environment:
+      - REDIS_HOSTS=local:redis:6379:0:powerrangers
+    depends_on:
+      - redis
+    links:
+      - redis
+    ports:
+    - "8081:8081"
+      
+  workerui:
+    restart: always
+    environment:
+      - REDIS_HOSTS=redis://:powerrangers@redis:6379/0
+    build:
+        context: .
+        dockerfile: Dockerfile.worker
+    ports:
+      - "8181:8181"
+
+  wpool:
+    restart: always
+    build:
+        context: .
+        dockerfile: Dockerfile.wpool
+    depends_on:
+      - redis
+    links:
+      - redis
+    ports:
+      - "9003:3000"
